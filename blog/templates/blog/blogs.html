@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="en">
-    
 
 <head>
     {% load staticfiles %}
@@ -9,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.88.1">
-    <title>Jeremy Naguran Portfolio</title>
+    <title>Jeremy's Blog</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/album/">
 
@@ -55,7 +54,7 @@
                     <div class="navbar-nav ms-auto">
                         <a class="nav-link" href="https://www.twitter.com">Twitter</a>
                         <a class="nav-link" href="{% static 'resume.pdf' %}">Resume</a>
-                        <a class="nav-link" href="{% url 'blogs' %}">Blog</a>
+                        <a class="nav-link active" href="{% url 'blogs' %}">Blog</a>
                     </div>
                 </div>
             </div>
@@ -63,47 +62,31 @@
     </header>
 
     <main>
-
-        <section class="py-5 text-center container">
-            <div class="row py-lg-5">
-                <div class="col-lg-6 col-md-8 mx-auto">
-                    <h1 class="fw-light">Hi, I'm Jeremy</h1>
-                    <p class="lead text-muted">Sup Buddy! My name is Jeremy Naguran and this Portflio web page is part of my Django course project.  I really hope this 
-                        shit helps me.  I am a bit pressed for time.</p>
-                    <img class="img-fluid" src="{% static 'IMG_3078.JPG' %}" width="200" height="250" />
-                    <p>
-                        <a href="#" class="btn btn-primary my-2">Email Me!</a>
-                    </p>
-                </div>
+        <div class="container">
+            <h1 class="text-center pt-3">Welcome to Jeremy's Blog</h1>
+            <br />
+            <br />
+            <h3>Latest Blogs</h3>
+            <hr />
+            
+            {% for blog in blogs.all  %}
+            <div>
+                <a href="{% url 'blog_detail' blog.id %}"><h4>{{ blog.title }}</h4></a>
+                <h5>{{ blog.pub_date_pretty }}</h5>
+                <img class="img-fluid" src="{{ blog.image.url }}" width="200" height="100" />
+                <p>{{ blog.summary }}</p>
             </div>
-        </section>
+            <br />
+            <br />
+            {% endfor %}
+                
+            
 
-        <div class="album py-5 bg-light">
-            <div class="container">
-
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                    
-                    {% for job in jobs.all %}
-                        
-                    <div class="col">
-                        <div class="card shadow-sm">
-                            <img class="bd-placeholder-img card-img-top" width="100%" height="225"
-                                src="{{ job.image.url }}"  />                          
-                            <div class="card-body">
-                                <p class="card-text">{{ job.summary }}</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    {% endfor %}
-
-                </div>
-            </div>
         </div>
 
     </main>
     <footer class="text-muted">
-        <div class="container">
+        <div class="container text-center">
             <p>© Jeremy Naguran {% now "Y" %}</p>
         </div>
     </footer>
