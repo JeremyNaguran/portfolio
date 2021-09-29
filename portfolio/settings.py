@@ -137,6 +137,11 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/'
 
+try:
+    from local_settings import *
+except ImportError:
+    pass
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
